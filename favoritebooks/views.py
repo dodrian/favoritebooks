@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
-from .permissions import IsOwnerOrAdminOrReadOnly
+from .permissions import IsOwnerOrAdminOrReadOnly, IsSelforAdminorReadOnly
 from .serializers import *
 from .models import Favorite, Author, Book
 
@@ -15,6 +15,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
 #    serializer_class = UserSerializer
     queryset = User.objects.all().order_by('-date_joined')
+    permission_classes = [IsSelforAdminorReadOnly]
 
     def get_serializer_class(self):
         # staff can edit user profiles

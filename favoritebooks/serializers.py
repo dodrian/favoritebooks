@@ -63,9 +63,9 @@ class CreateUserSerializer(serializers.ModelSerializer):
         fields = ('email', 'username', 'password')
         extra_kwargs = {'password': {'write_only': True}}
 
-        def create(self, validated_data):
-            print('Creating User...')
-            User.objects.create_user(**validated_data)
+    def create(self, validated_data):
+        print('Creating User...')
+        return User.objects.create_user(**validated_data)
 
 
 class EditableUserSerializer(serializers.HyperlinkedModelSerializer):
